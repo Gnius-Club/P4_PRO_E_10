@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playbook - Robot Héroe Avanzado - Sesión 10: ¡Refinamiento o Nueva Habilidad!</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; }
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
+        .header { background-color: #ffa500; color: white; text-align: center; padding: 10px; } /* Orange Accent */
+        .activity { margin-bottom: 20px; }
+        .banner {
+            background-color: #ffa500; /* Orange Accent */
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-weight: bold;
+            /* Added Flexbox for side-by-side layout */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* Use details/summary for accordions */
+        details > summary {
+            list-style: none; /* Remove default triangle */
+        }
+        details > summary::-webkit-details-marker {
+            display: none; /* Remove default triangle for Chrome/Safari */
+        }
+        details > summary::marker {
+             display: none; /* Remove default triangle for Firefox */
+        }
+        /* Custom marker logic (optional) */
+        /*
+         details > summary:before {
+            content: '▶ ';
+            margin-right: 5px;
+         }
+         details[open] > summary:before {
+            content: '▼ ';
+         }
+        */
+        .content { display: block; padding: 10px; border: 1px solid #ddd; margin-top: -10px; margin-bottom: 10px; border-top: none;} /* Ensure content is visible by default */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+            vertical-align: top;
+        }
+        span[style*="color: red;"] { /* Keep red span for emphasis */
+            font-weight: bold;
+        }
+         ul, ol {
+            margin-top: 0;
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .time-title { margin-bottom: 20px; text-align: center; font-size: 1.2em; color: #555;}
+        /* Style for Kanban icons */
+        .kanban-icon { font-size: 1.2em; margin: 0 2px; }
+        .kanban-todo { color: #f0ad4e; } /* Yellow/Orange for To Do */
+        .kanban-doing { color: #5bc0de; } /* Blue for Doing */
+        .kanban-test { color: #d9534f; } /* Red for Test */
+        .kanban-done { color: #5cb85c; } /* Green for Done */
+
+        /* Span styles for title and time in banner */
+        .activity-title {
+            flex-grow: 1; /* Allows title to take available space */
+            padding-right: 10px; /* Add some space between title and time */
+        }
+        .activity-time {
+            white-space: nowrap; /* Prevents time from wrapping */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Playbook - Robot Héroe Avanzado - Sesión 10: ¡Refinamiento o Nueva Habilidad! – Decisión Estratégica</h1>
+    </div>
+    <div class="container">
+        <h2 class="time-title">Tiempo efectivo de clase: 40 minutos</h2>
+
+        <!-- Resumen de Sesión -->
+        <details id="activity-0" class="activity">
+            <summary class="banner">
+                <span class="activity-title">📝 Resumen de Sesión</span>
+                <span class="activity-time"></span>
+            </summary>
+            <div class="content">
+                <table>
+                    <tr>
+                        <td style="width: 50%; padding: 10px; border-right: 1px solid #ddd;">
+                            <strong>🎯 Objetivo de la Sesión:</strong>
+                            <ul>
+                                <li>Evaluar el estado general del prototipo avanzado.</li>
+                                <li>Decidir estratégicamente como equipo si enfocar el tiempo restante en:
+                                    <ul>
+                                        <li>Refinar el prototipo existente (mejorar estabilidad, usabilidad, corregir bugs).</li>
+                                        <li>Intentar añadir una segunda feature/mejora más pequeña.</li>
+                                    </ul>
+                                </li>
+                                <li>Actualizar el backlog y comenzar a trabajar en la dirección elegida.</li>
+                            </ul>
+                            <strong>⏱️ Duración Estimada:</strong> 40 minutos.
+                        </td>
+                        <td style="width: 50%; padding: 10px;">
+                            <strong>🔑 Entregable Clave:</strong>
+                            <ul>
+                                <li>Decisión estratégica del equipo documentada (Refinar o Nueva Feature).</li>
+                                <li>Backlog ("Por Hacer" 💡) actualizado según la decisión.</li>
+                                <li>Progreso inicial en el trabajo técnico enfocado (refinamiento o desarrollo de nueva feature).</li>
+                                <li>Plan claro para la penúltima sesión (S11).</li>
+                            </ul>
+                            <strong>🛠️ Materiales Específicos:</strong>
+                             <ul>
+                                <li>Proyector o pantalla interactiva.</li>
+                                <li>Presentación de diapositivas (Diapositivas 1-5 propuestas).</li>
+                                <li>Tableros Kanban de cada equipo (actualizados de S9).</li>
+                                <li>Prototipos funcionales (con núcleo y Feature 1 idealmente en ✅).</li>
+                                <li>Computadoras con software de programación.</li>
+                                <li>Documentación de sesiones anteriores (backlog, diseño, resultados de pruebas).</li>
+                             </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </details>
+
+        <!-- Desarrollo de la Sesión -->
+
+        <!-- Actividad 1: ¡Stand-up Estratégico de Mitad de Misión! -->
+        <details id="activity-1" class="activity">
+            <summary class="banner">
+                 <span class="activity-title">🧭 Actividad 1: ¡Stand-up Estratégico de Mitad de Misión!</span>
+                 <span class="activity-time">⏰ Tiempo: 10 minutos</span>
+            </summary>
+            <div class="content">
+                <table>
+                    <tr>
+                        <th style="width: 50%;">Acción</th>
+                        <th style="width: 50%;">Diálogo del Maestro</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Paso 1 (1 min):</strong> Iniciar la sesión destacando el punto de decisión.
+                            <br><em>(<strong>Proyectar Diapositiva 1:</strong> Título Sesión 10 (Avanzado) + Objetivo: "¡Refinamiento o Nueva Habilidad! Objetivo: Evaluar prototipo y decidir estrategia final (Refinar vs. Nueva Feature)").</em>
+                        </td>
+                        <td>
+                            "¡Equipos, bienvenidos a la Sesión 10! Estamos en un punto crucial de nuestra Misión Extendida. Hoy tomaremos una decisión estratégica importante sobre cómo usar el tiempo que nos queda para tener el mejor Robot Héroe Avanzado posible."
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Paso 2 (4 min):</strong> El Arquitecto/a T. lidera una revisión completa del Kanban y una demo rápida interna.
+                            <br><em>(<strong>Proyectar Diapositiva 2:</strong> Stand-up Estratégico - Rol Líder: Arq. T. 📐. Tareas: Revisión COMPLETA Kanban (✅, 🔬, ⚙️, 💡). Demo rápida interna. Pregunta Clave: ¿Qué falta para "Avanzado"?).</em>
+                        </td>
+                        <td>
+                            "Iniciamos con un 'Stand-up Estratégico'. <strong>Arquitecto/a T. (📐)</strong>, lidera a tu equipo en esta revisión:"
+                            <br><br>
+                            "1. <strong>Revisión Completa del Kanban:</strong> Miren TODO el tablero. ¿Qué tareas están en '¡Listo!' (✅)? ¿Qué queda en 'Listo para Probar' (🔬), 'Haciendo' (⚙️) o 'Por Hacer' (💡)? ¿Refleja el estado real?"
+                            <br>
+                            "2. <strong>Demo Rápida Interna:</strong> Hagan una demostración rápida para ustedes mismos. ¿Qué hace el robot AHORA MISMO? ¿Funciona bien el núcleo y la Feature 1 (si está lista)?"
+                            <br><br>
+                            "Basado en esto, la pregunta clave es: <strong>¿Qué le falta a nuestro prototipo para ser considerado 'Avanzado' según nuestro objetivo final?</strong>"
+                            <br><br>
+                            "Tómense unos minutos para revisar y hacer la demo." <em>(Facilitar esta revisión interna).</em>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            <strong>Paso 3 (4 min):</strong> Facilitar la discusión y decisión del equipo: ¿Refinar o Nueva Feature?
+                            <br><em>(En la misma Diapositiva 2 o una nueva: Decisión Estratégica - Opción A: Refinar (Icono ✨): Mejorar estabilidad, usabilidad, corregir bugs. Opción B: Nueva Feature (Icono ➕): Añadir algo nuevo (ej: sonidos, otra lógica sensor)).</em>
+                        </td>
+                        <td>
+                            "Ok, ya tienen una idea clara del estado actual. Ahora viene la decisión estratégica, equipo:"
+                            <br><br>
+                            "<strong>Opción A: ¡Refinar! (✨)</strong> ¿Es mejor usar el tiempo restante para pulir lo que ya tenemos? Esto significa: mejorar la estabilidad del robot, hacerlo más fácil de usar (usabilidad), y cazar y corregir esos bugs menores que seguro quedan."
+                            <br><br>
+                            "<strong>Opción B: ¡Nueva Habilidad! (➕)</strong> ¿Nos arriesgamos a añadir una segunda feature o mejora? Sería algo más pequeño y simple que la Feature 1 (ej: añadir sonidos de alerta, otra lógica simple con un sensor existente). Esto añadiría más funcionalidad, pero podría introducir nuevos bugs."
+                            <br><br>
+                            "Discutan como equipo: ¿Qué camino nos acerca más a un prototipo 'Avanzado' y entregable en 2 sesiones más? ¿Priorizamos robustez o más funciones? ¡Deben llegar a un acuerdo!" <em>(Moderar la discusión y la toma de decisión).</em>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            <strong>Paso 4 (1 min):</strong> Actualizar el backlog "Por Hacer" 💡 según la decisión.
+                        </td>
+                        <td>
+                            "¿Decisión tomada? ¡Excelente! Ahora, actualicen rápidamente su columna <strong class='kanban-icon kanban-todo'>💡 Por Hacer</strong> en el Kanban. Si eligieron 'Refinar', asegúrense de tener tareas como 'Optimizar código X', 'Probar usabilidad Y', 'Corregir bug Z'. Si eligieron 'Nueva Feature', añadan las tareas necesarias para diseñarla e implementarla (será un ciclo rápido)."
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </details>
+
+        <!-- Actividad 2: ¡Trabajo Técnico Enfocado! -->
+        <details id="activity-2" class="activity">
+            <summary class="banner">
+                 <span class="activity-title">🛠️ Actividad 2: ¡Trabajo Técnico Enfocado!</span>
+                 <span class="activity-time">⏰ Tiempo: 25 minutos</span>
+            </summary>
+            <div class="content">
+                <table>
+                    <tr>
+                        <th style="width: 50%;">Acción</th>
+                        <th style="width: 50%;">Diálogo del Maestro</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Paso 1 (3 min):</strong> Explicar cómo trabajarán los roles según la decisión tomada.
+                            <br><em>(<strong>Proyectar Diapositiva 3:</strong> Opción Refinar ✨ - Tareas Roles: Ing. 💻 Optimiza código. Tester 🧪 Pruebas regresión/usabilidad. Arq. T. 📐 Pulido físico/lógico).</em>
+                            <br><em>(<strong>Proyectar Diapositiva 4:</strong> Opción Nueva Feature ➕ - Tareas Roles: Ciclo similar a S7-9 pero más rápido/simple (Diseño Arq. T. -> Implementación Ing. -> Pruebas Tester)).</em>
+                        </td>
+                        <td>
+                            "¡Muy bien! Ahora, ¡manos a la obra en la dirección que eligieron! El trabajo se enfocará así:"
+                            <br><br>
+                            "<strong>Si decidieron REFINAR (✨):</strong>"
+                            <br>   "- <strong>Ingeniero/a (💻):</strong> Busca oportunidades para optimizar el código, hacerlo más eficiente o limpio."
+                            <br>   "- <strong>Tester (🧪):</strong> Realiza pruebas de <span style='color: red;'>regresión</span> (probar todo lo anterior para asegurar que nada se rompió) y pruebas de <span style='color: red;'>usabilidad</span> (¿es fácil interactuar con el robot?)."
+                            <br>   "- <strong>Arquitecto/a T. (📐):</strong> Se enfoca en el pulido final físico (cables, estructura) y lógico (revisar la coherencia general del comportamiento)."
+                            <br><br>
+                            "<strong>Si decidieron NUEVA FEATURE (➕):</strong>"
+                            <br>   "- ¡Activamos un ciclo rápido como el de las Sesiones 7-9! Empiecen ya: <strong>Arq. T. 📐</strong> lidera un diseño técnico rápido y simple. Luego, <strong>Ing. 💻</strong> implementa el código básico. Y <strong>Tester 🧪</strong> prepara pruebas simples."
+                            <br>   "- ¡Debe ser algo más sencillo que la Feature 1!"
+                            <br><br>
+                            "Elijan las primeras tareas de su backlog actualizado y ¡muévanlas a <strong class='kanban-icon kanban-doing'>⚙️ Haciendo</strong>!"
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Paso 2 (22 min):</strong> Equipos trabajan enfocados en la dirección decidida.
+                            <br>Circular intensamente, apoyando según la necesidad de cada equipo y su camino elegido (refinamiento o nueva feature).
+                            <br>Si refinan: ayudar a identificar áreas de optimización, guiar pruebas de regresión/usabilidad.
+                            <br>Si nueva feature: facilitar el ciclo rápido de diseño-implementación-prueba.
+                        </td>
+                        <td>
+                            "¡Adelante con el trabajo enfocado! Tienen 22 minutos."
+                            <br><br>
+                            <em>(Mientras circulas, adaptar el apoyo):</em>
+                            "<em>(Si refinan)</em> Ingeniero/a, ¿ves alguna parte del código que se pueda simplificar? Tester, ¿qué aspecto de usabilidad estás probando ahora? Arq. T, ¿cómo va ese orden de cables?"
+                            "<em>(Si nueva feature)</em> Arq. T, ¿diseño listo? Ingeniero/a, ¿cómo va ese código inicial? Tester, ¿plan de prueba simple preparado?"
+                            "¡Recuerden el objetivo final, sea robustez o una nueva habilidad!"
+                            "¡Mantengan el Kanban actualizado!"
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </details>
+
+        <!-- Actividad 3: ¡Ajuste de Rumbo Final! -->
+        <details id="activity-3" class="activity">
+            <summary class="banner">
+                 <span class="activity-title">🗺️ Actividad 3: ¡Ajuste de Rumbo Final!</span>
+                 <span class="activity-time">⏰ Tiempo: 5 minutos</span>
+            </summary>
+            <div class="content">
+                <table>
+                     <tr>
+                        <th style="width: 50%;">Acción</th>
+                        <th style="width: 50%;">Diálogo del Maestro</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Paso 1 (3 min):</strong> Revisión final del progreso y confirmación del plan para S11.
+                            <br><em>(<strong>Proyectar Diapositiva 5:</strong> Ajuste de Rumbo Final - Kanban S10. Preguntas: ¿Progreso hoy? ¿Plan claro para S11 (Puesta a Punto Final)? ¿Tareas listas en 💡 o ⚙️?).</em>
+                            <br>Cada equipo revisa su Kanban y confirma las tareas prioritarias para la penúltima sesión.
+                        </td>
+                        <td>
+                            "¡Pausa final, equipos! Hora de ajustar el rumbo para la recta final."
+                            <br><br>
+                            "Revisen su Kanban y el trabajo de hoy:"
+                            <br>
+                            "1. ¿Qué progreso lograron en el refinamiento o en la nueva feature?"
+                            <br>
+                            "2. Mirando lo que queda en <strong class='kanban-icon kanban-todo'>💡 Por Hacer</strong> o <strong class='kanban-icon kanban-doing'>⚙️ Haciendo</strong>, ¿cuál es el plan y las tareas <span style='color: red;'>PRIORITARIAS</span> para la Sesión 11, que será nuestra 'Puesta a Punto Final' antes de la entrega?"
+                            <br><br>
+                            "Confirmen en equipo su plan para la penúltima sesión." <em>(Dar 1-2 minutos).</em>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            <strong>Paso 2 (2 min):</strong> Cierre de la sesión y anticipación de S11 (Optimización Final).
+                        </td>
+                        <td>
+                            "¡Excelente trabajo estratégico y técnico hoy! Han tomado una decisión importante y han avanzado en esa dirección."
+                            <br><br>
+                            "La Sesión 11 será crucial: '¡Puesta a Punto Final! – Optimizando al Héroe Avanzado'. Nos dedicaremos a integrar cualquier trabajo pendiente de hoy, hacer debugging final intensivo, optimizar el rendimiento y asegurar la robustez general del robot para dejarlo listo para la entrega final en la Sesión 12."
+                            <br><br>
+                            "¡Guarden todo! ¡Nos vemos para el último sprint de optimización!"
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </details>
+
+    </div> <!-- Fin del container -->
+</body>
+</html>
