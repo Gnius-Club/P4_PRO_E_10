@@ -14,34 +14,24 @@
             color: white;
             padding: 10px;
             cursor: pointer;
-            margin-bottom: 10px;
+            margin-bottom: 10px; /* Adjusted for spacing */
             font-weight: bold;
-            /* Added Flexbox for side-by-side layout */
-            display: flex;
+            list-style: none;
+            display: flex; /* For side-by-side title and time */
             justify-content: space-between;
             align-items: center;
+            border-radius: 5px; /* Rounded corners for banner */
         }
-        /* Use details/summary for accordions */
-        details > summary {
-            list-style: none; /* Remove default triangle */
+        .content { 
+            display: none; 
+            padding: 15px; 
+            border: 1px solid #ddd; 
+            margin-bottom: 10px; 
+            border-radius: 5px; /* Rounded corners for content */
+            margin-top: -10px; /* Visual connection with banner */
+            padding-top: 20px; /* Avoid text clash */
+            background-color: #fff; /* Ensure content background is white or default */
         }
-        details > summary::-webkit-details-marker {
-            display: none; /* Remove default triangle for Chrome/Safari */
-        }
-        details > summary::marker {
-             display: none; /* Remove default triangle for Firefox */
-        }
-        /* Custom marker logic (optional) */
-        /*
-         details > summary:before {
-            content: '▶ ';
-            margin-right: 5px;
-         }
-         details[open] > summary:before {
-            content: '▼ ';
-         }
-        */
-        .content { display: block; padding: 10px; border: 1px solid #ddd; margin-top: -10px; margin-bottom: 10px; border-top: none;} /* Ensure content is visible by default */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -52,7 +42,7 @@
             text-align: left;
             vertical-align: top;
         }
-        span[style*="color: red;"] { /* Keep red span for emphasis */
+        span[style*="color: red;"] { 
             font-weight: bold;
         }
          ul, ol {
@@ -71,15 +61,49 @@
         .kanban-test { color: #d9534f; } /* Red for Test */
         .kanban-done { color: #5cb85c; } /* Green for Done */
 
-        /* Span styles for title and time in banner */
+        /* Making facilitator instructions clearer */
+        td em, td i { /* Style for italicized facilitator notes */
+            color: #555;
+            font-style: italic;
+            display: block; /* Put notes on new lines */
+            margin-top: 5px;
+        }
+        /* Ensure step <strong> tags render bold */
+        td strong { font-weight: bold; } /* General strong for keywords */
+        td > strong { display: block; margin-bottom: 5px; } /* For step headers */
+
         .activity-title {
-            flex-grow: 1; /* Allows title to take available space */
-            padding-right: 10px; /* Add some space between title and time */
+            flex-grow: 1; 
+            padding-right: 10px; 
         }
         .activity-time {
-            white-space: nowrap; /* Prevents time from wrapping */
+            white-space: nowrap; 
         }
     </style>
+    <script>
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            if (content) {
+                if (content.style.display === "none" || content.style.display === "") {
+                    content.style.display = "block";
+                } else {
+                    content.style.display = "none";
+                }
+            }
+        }
+
+        window.onload = () => {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.style.display = 'none';
+            });
+            // Open "Resumen de Sesión" by default
+            const resumenContent = document.getElementById('activity_0_content');
+            if (resumenContent) {
+                resumenContent.style.display = 'block';
+            }
+        };
+    </script>
 </head>
 <body>
     <div class="header">
@@ -89,12 +113,12 @@
         <h2 class="time-title">Tiempo efectivo de clase: 40 minutos</h2>
 
         <!-- Resumen de Sesión -->
-        <details id="activity-0" class="activity">
-            <summary class="banner">
+        <div id="activity-0" class="activity">
+            <div class="banner" onclick="toggleContent('activity_0_content')">
                 <span class="activity-title">📝 Resumen de Sesión</span>
                 <span class="activity-time"></span>
-            </summary>
-            <div class="content">
+            </div>
+            <div id="activity_0_content" class="content" style="display: block;">
                 <table>
                     <tr>
                         <td style="width: 50%; padding: 10px; border-right: 1px solid #ddd;">
@@ -132,17 +156,17 @@
                     </tr>
                 </table>
             </div>
-        </details>
+        </div>
 
         <!-- Desarrollo de la Sesión -->
 
         <!-- Actividad 1: ¡Stand-up Estratégico de Mitad de Misión! -->
-        <details id="activity-1" class="activity">
-            <summary class="banner">
+        <div id="activity-1" class="activity">
+            <div class="banner" onclick="toggleContent('activity_1_content')">
                  <span class="activity-title">🧭 Actividad 1: ¡Stand-up Estratégico de Mitad de Misión!</span>
                  <span class="activity-time">⏰ Tiempo: 10 minutos</span>
-            </summary>
-            <div class="content">
+            </div>
+            <div id="activity_1_content" class="content">
                 <table>
                     <tr>
                         <th style="width: 50%;">Acción</th>
@@ -150,17 +174,23 @@
                     </tr>
                     <tr>
                         <td>
-                            <strong>Paso 1 (1 min):</strong> Iniciar la sesión destacando el punto de decisión.
-                            <br><em>(<strong>Proyectar Diapositiva 1:</strong> Título Sesión 10 (Avanzado) + Objetivo: "¡Refinamiento o Nueva Habilidad! Objetivo: Evaluar prototipo y decidir estrategia final (Refinar vs. Nueva Feature)").</em>
+                            <strong>Paso 1 (1 min):</strong>
+                            <ul>
+                                <li>Iniciar la sesión destacando el punto de decisión.</li>
+                                <li><strong>Proyectar Diapositiva 1</strong>.</li>
+                            </ul>
                         </td>
                         <td>
-                            "¡Equipos, bienvenidos a la Sesión 10! Estamos en un punto crucial de nuestra Misión Extendida. Hoy tomaremos una decisión estratégica importante sobre cómo usar el tiempo que nos queda para tener el mejor Robot Héroe Avanzado posible."
+                            "¡Equipos Pro! Han avanzado mucho. Ahora llegamos a un punto estratégico interesante. Tenemos que tomar una decisión importante para las últimas sesiones: ¿Nos dedicamos a refinar y pulir lo que ya tenemos para que quede espectacular, o nos aventuramos a añadir una segunda feature adicional (más pequeña)?"
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <strong>Paso 2 (4 min):</strong> El Arquitecto/a T. lidera una revisión completa del Kanban y una demo rápida interna.
-                            <br><em>(<strong>Proyectar Diapositiva 2:</strong> Stand-up Estratégico - Rol Líder: Arq. T. 📐. Tareas: Revisión COMPLETA Kanban (✅, 🔬, ⚙️, 💡). Demo rápida interna. Pregunta Clave: ¿Qué falta para "Avanzado"?).</em>
+                            <strong>Paso 2 (4 min):</strong>
+                            <ul>
+                                <li>El Arquitecto/a T. lidera una revisión completa del Kanban y una demo rápida interna.</li>
+                                <li><strong>Proyectar Diapositiva 2</strong>.</li>
+                            </ul>
                         </td>
                         <td>
                             "Iniciamos con un 'Stand-up Estratégico'. <strong>Arquitecto/a T. (📐)</strong>, lidera a tu equipo en esta revisión:"
@@ -176,8 +206,11 @@
                     </tr>
                      <tr>
                         <td>
-                            <strong>Paso 3 (4 min):</strong> Facilitar la discusión y decisión del equipo: ¿Refinar o Nueva Feature?
-                            <br><em>(En la misma Diapositiva 2 o una nueva: Decisión Estratégica - Opción A: Refinar (Icono ✨): Mejorar estabilidad, usabilidad, corregir bugs. Opción B: Nueva Feature (Icono ➕): Añadir algo nuevo (ej: sonidos, otra lógica sensor)).</em>
+                            <strong>Paso 3 (4 min):</strong>
+                            <ul>
+                                <li>Facilitar la discusión y decisión del equipo: ¿Refinar o Nueva Feature?</li>
+                                <li>Anotar la decisión.</li>
+                            </ul>
                         </td>
                         <td>
                             "Ok, ya tienen una idea clara del estado actual. Ahora viene la decisión estratégica, equipo:"
@@ -191,7 +224,10 @@
                     </tr>
                      <tr>
                         <td>
-                            <strong>Paso 4 (1 min):</strong> Actualizar el backlog "Por Hacer" 💡 según la decisión.
+                            <strong>Paso 4 (1 min):</strong>
+                            <ul>
+                                <li>Actualizar el backlog "Por Hacer" 💡 según la decisión.</li>
+                            </ul>
                         </td>
                         <td>
                             "¿Decisión tomada? ¡Excelente! Ahora, actualicen rápidamente su columna <strong class='kanban-icon kanban-todo'>💡 Por Hacer</strong> en el Kanban. Si eligieron 'Refinar', asegúrense de tener tareas como 'Optimizar código X', 'Probar usabilidad Y', 'Corregir bug Z'. Si eligieron 'Nueva Feature', añadan las tareas necesarias para diseñarla e implementarla (será un ciclo rápido)."
@@ -199,15 +235,15 @@
                     </tr>
                 </table>
             </div>
-        </details>
+        </div>
 
         <!-- Actividad 2: ¡Trabajo Técnico Enfocado! -->
-        <details id="activity-2" class="activity">
-            <summary class="banner">
+        <div id="activity-2" class="activity">
+            <div class="banner" onclick="toggleContent('activity_2_content')">
                  <span class="activity-title">🛠️ Actividad 2: ¡Trabajo Técnico Enfocado!</span>
                  <span class="activity-time">⏰ Tiempo: 25 minutos</span>
-            </summary>
-            <div class="content">
+            </div>
+            <div id="activity_2_content" class="content">
                 <table>
                     <tr>
                         <th style="width: 50%;">Acción</th>
@@ -215,9 +251,12 @@
                     </tr>
                     <tr>
                         <td>
-                            <strong>Paso 1 (3 min):</strong> Explicar cómo trabajarán los roles según la decisión tomada.
-                            <br><em>(<strong>Proyectar Diapositiva 3:</strong> Opción Refinar ✨ - Tareas Roles: Ing. 💻 Optimiza código. Tester 🧪 Pruebas regresión/usabilidad. Arq. T. 📐 Pulido físico/lógico).</em>
-                            <br><em>(<strong>Proyectar Diapositiva 4:</strong> Opción Nueva Feature ➕ - Tareas Roles: Ciclo similar a S7-9 pero más rápido/simple (Diseño Arq. T. -> Implementación Ing. -> Pruebas Tester)).</em>
+                            <strong>Paso 1 (3 min):</strong>
+                            <ul>
+                                <li>Explicar cómo trabajarán los roles según la decisión tomada.</li>
+                                <li><strong>Proyectar Diapositiva 3</strong>.</li>
+                                <li><strong>Proyectar Diapositiva 4</strong>.</li>
+                            </ul>
                         </td>
                         <td>
                             "¡Muy bien! Ahora, ¡manos a la obra en la dirección que eligieron! El trabajo se enfocará así:"
@@ -236,10 +275,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <strong>Paso 2 (22 min):</strong> Equipos trabajan enfocados en la dirección decidida.
-                            <br>Circular intensamente, apoyando según la necesidad de cada equipo y su camino elegido (refinamiento o nueva feature).
-                            <br>Si refinan: ayudar a identificar áreas de optimización, guiar pruebas de regresión/usabilidad.
-                            <br>Si nueva feature: facilitar el ciclo rápido de diseño-implementación-prueba.
+                            <strong>Paso 2 (22 min):</strong>
+                            <ul>
+                                <li>Equipos trabajan enfocados en la dirección decidida.</li>
+                                <li>Circular intensamente, apoyando según la necesidad de cada equipo y su camino elegido.</li>
+                                <li>Si refinan: ayudar a identificar áreas de optimización, guiar pruebas de regresión/usabilidad.</li>
+                                <li>Si nueva feature: facilitar el ciclo rápido de diseño-implementación-prueba.</li>
+                            </ul>
                         </td>
                         <td>
                             "¡Adelante con el trabajo enfocado! Tienen 22 minutos."
@@ -253,15 +295,15 @@
                     </tr>
                 </table>
             </div>
-        </details>
+        </div>
 
         <!-- Actividad 3: ¡Ajuste de Rumbo Final! -->
-        <details id="activity-3" class="activity">
-            <summary class="banner">
+        <div id="activity-3" class="activity">
+            <div class="banner" onclick="toggleContent('activity_3_content')">
                  <span class="activity-title">🗺️ Actividad 3: ¡Ajuste de Rumbo Final!</span>
                  <span class="activity-time">⏰ Tiempo: 5 minutos</span>
-            </summary>
-            <div class="content">
+            </div>
+            <div id="activity_3_content" class="content">
                 <table>
                      <tr>
                         <th style="width: 50%;">Acción</th>
@@ -269,9 +311,12 @@
                     </tr>
                     <tr>
                         <td>
-                            <strong>Paso 1 (3 min):</strong> Revisión final del progreso y confirmación del plan para S11.
-                            <br><em>(<strong>Proyectar Diapositiva 5:</strong> Ajuste de Rumbo Final - Kanban S10. Preguntas: ¿Progreso hoy? ¿Plan claro para S11 (Puesta a Punto Final)? ¿Tareas listas en 💡 o ⚙️?).</em>
-                            <br>Cada equipo revisa su Kanban y confirma las tareas prioritarias para la penúltima sesión.
+                            <strong>Paso 1 (3 min):</strong>
+                            <ul>
+                                <li>Revisión final del progreso y confirmación del plan para S11.</li>
+                                <li><strong>Proyectar Diapositiva 5</strong>.</li>
+                                <li>Cada equipo revisa su Kanban y confirma las tareas prioritarias para la penúltima sesión.</li>
+                            </ul>
                         </td>
                         <td>
                             "¡Pausa final, equipos! Hora de ajustar el rumbo para la recta final."
@@ -287,7 +332,10 @@
                     </tr>
                      <tr>
                         <td>
-                            <strong>Paso 2 (2 min):</strong> Cierre de la sesión y anticipación de S11 (Optimización Final).
+                            <strong>Paso 2 (2 min):</strong>
+                            <ul>
+                                <li>Cierre de la sesión y anticipación de S11 (Optimización Final).</li>
+                            </ul>
                         </td>
                         <td>
                             "¡Excelente trabajo estratégico y técnico hoy! Han tomado una decisión importante y han avanzado en esa dirección."
@@ -299,7 +347,7 @@
                     </tr>
                 </table>
             </div>
-        </details>
+        </div>
 
     </div> <!-- Fin del container -->
 </body>
